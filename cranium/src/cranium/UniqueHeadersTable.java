@@ -62,13 +62,11 @@ public class UniqueHeadersTable extends JTable implements IHttpListener {
 
 						if (!model.getHeaderValuesMap().containsKey(name)) {
 							model.getHeaderValuesMap().put(name, new LinkedHashSet<>());
-						}
-						HeaderValue headerValue = new HeaderValue(value, callbacks.saveBuffersToTempFiles(messageInfo));
-						model.getHeaderValuesMap().get(name).add(headerValue);
-						if (!model.getUniqueHeaderNames().contains(name)) {
 							model.getUniqueHeaderNames().add(name);
 							endRow++;
 						}
+						HeaderValue headerValue = new HeaderValue(value, callbacks.saveBuffersToTempFiles(messageInfo));
+						model.getHeaderValuesMap().get(name).add(headerValue);
 					}
 					if (endRow > startRow) {
 						model.fireTableRowsInserted(startRow, endRow - 1);
